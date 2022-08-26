@@ -1,0 +1,19 @@
+{
+  "name": "botTg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^6.5.2",
+    "node-telegram-bot-api": "^0.58.0",
+    "nodemon": "^2.0.19",
+    "random-number": "0.0.9"
+  }
+}
