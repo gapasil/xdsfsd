@@ -132,6 +132,84 @@ const start = async () =>{
             const referal = ref.join("")
             Referal.findRef(referal)
         }
+        if(text == "/start"){
+          State.fixState(user.name,"")
+          bot.sendMessage(chatId, "Выберите действие:", {
+              "reply_markup": {
+                "inline_keyboard": [
+                  [
+                    {
+                      text: "🔄 Обновить баланс 🔄",
+                      callback_data: "retry",
+                    },
+                  ],
+                  ],                 
+              },            
+          });
+          return bot.sendPhoto(chatId,"https://t.me/acescasino/15",{
+              caption:`
+              💼 Личный кабинет
+➖➖➖➖➖➖➖➖
+💰 Баланс: ${user.pay}₽
+                  
+👤 Приглашено: ${user.useradd}
+                  
+🔗 Пригласительная ссылка:
+${user.ref}
+➖➖➖➖➖➖➖➖
+🟢 Игроков в сети: ${500}`
+          })
+      }
+
+      if(text == "/game"){
+          State.fixState(user.name,"")
+          return bot.sendMessage(chatId, "Режимы игры:", {
+              "reply_markup": {
+                "inline_keyboard": [
+                  [
+                    {
+                      text: "Монетка 🪙",
+                      callback_data: "coin",
+                    },
+                  ],
+                  [
+                    {
+                      text: "Dice 🎲",
+                      callback_data: "dice",
+                    },
+                  ]
+                  ],                 
+              },            
+          });         
+      }
+      if(text == "/pay"){
+          State.fixState(user.name,"")
+          return bot.sendMessage(chatId, "Выберите действие:", {
+              "reply_markup": {
+                "inline_keyboard": [
+                  [
+                    {
+                      text: "Пополнить 🪙",
+                      callback_data: "add",
+                    },
+                  ],
+                  [
+                    {
+                      text: "Вывести 🎲",
+                      callback_data: "diminish",
+                    },
+                  ],
+                  [
+                    {
+                      text: "Обменять рефералы 🔗",
+                      callback_data: "ref",
+                    },
+                  ]
+                  ],                 
+              },            
+          });         
+      }
+
         if(user.state == "addPay"){
             if (!isNaN(parseFloat(text)) && isFinite(text)){
                 Pay.addPay(user.name,text)
@@ -223,85 +301,6 @@ const start = async () =>{
             State.fixState(user.name,"")
             return bot.sendMessage(chatId,"❌Сумма должна быть числом!")
           }
-        }
-
-
-        if(text == "/start"){
-            State.fixState(user.name,"")
-            bot.sendMessage(chatId, "Выберите действие:", {
-                "reply_markup": {
-                  "inline_keyboard": [
-                    [
-                      {
-                        text: "🔄 Обновить баланс 🔄",
-                        callback_data: "retry",
-                      },
-                    ],
-                    ],                 
-                },            
-            });
-            return bot.sendPhoto(chatId,"https://t.me/acescasino/15",{
-                caption:`
-                💼 Личный кабинет
-➖➖➖➖➖➖➖➖
-💰 Баланс: ${user.pay}₽
-                    
-👤 Приглашено: ${user.useradd}
-                    
-🔗 Пригласительная ссылка:
-${user.ref}
-➖➖➖➖➖➖➖➖
-🟢 Игроков в сети: ${500}`
-            })
-        }
-
-        if(text == "/game"){
-            State.fixState(user.name,"")
-            return bot.sendMessage(chatId, "Режимы игры:", {
-                "reply_markup": {
-                  "inline_keyboard": [
-                    [
-                      {
-                        text: "Монетка 🪙",
-                        callback_data: "coin",
-                      },
-                    ],
-                    [
-                      {
-                        text: "Dice 🎲",
-                        callback_data: "dice",
-                      },
-                    ]
-                    ],                 
-                },            
-            });         
-        }
-        if(text == "/pay"){
-            State.fixState(user.name,"")
-            return bot.sendMessage(chatId, "Выберите действие:", {
-                "reply_markup": {
-                  "inline_keyboard": [
-                    [
-                      {
-                        text: "Пополнить 🪙",
-                        callback_data: "add",
-                      },
-                    ],
-                    [
-                      {
-                        text: "Вывести 🎲",
-                        callback_data: "diminish",
-                      },
-                    ],
-                    [
-                      {
-                        text: "Обменять рефералы 🔗",
-                        callback_data: "ref",
-                      },
-                    ]
-                    ],                 
-                },            
-            });         
         }
     }
     )
